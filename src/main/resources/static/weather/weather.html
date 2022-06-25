@@ -1,0 +1,85 @@
+<div class="weather-vertical">
+    <div class="weather-vertical-inside">
+        <h4 class="h4">Прогноз погоды на 10 дней</h4>
+        <div class="right-container">
+            <label>Город для получения прогноза погоды:
+                <input type="text" placeholder="Введите название города на анклийском"
+                       ng-model="forecastCity">
+                <button type="submit" ng-click="loadForecast(forecastCity)">Получить прогноз</button>
+                <br>
+                <div class="error" ng-repeat="error in forecastError">
+                    {{error.date}}
+                </div>
+            </label>
+            <h4 class="h4">{{forecastCityName}} {{forecastCountryName}}</h4>
+            <div class="weather-horizontal">
+                <div>
+                    <div ng-repeat="f in forecastList">
+                        <a href="" ng-click="getSelectedForecast(f)">{{f.date}}
+                            <img src="{{f.day.condition.icon}}"> {{f.day.condition.text}}, {{f.day.avgtemp_c}} C</a>
+                    </div>
+                </div>
+                <div class="forecast">
+                    <div class="forecast-hour" ng-repeat="h in forecast.hour">
+                        {{h.time}} <img src="{{h.condition.icon}}">  {{h.temp_c}}
+                        {{h.condition.text}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weather-horizontal">
+        <div class="weather-horizontal-inside">
+            <a href="https://www.weatherapi.com/" title="Free Weather API"><img
+                    src='//cdn.weatherapi.com/v4/images/weatherapi_logo.png' alt="Weather data by WeatherAPI.com"
+                    border="0"></a>
+            <div>
+                <h4 class="h4">Сохранённая погода</h4>
+                <div class="left-container">
+                    <div ng-repeat="s in savedList">
+                        <a href="" ng-click="getSelectedWeather(s)">{{s}}</a>
+                        <button ng-click="deleteSelectedWeather(s)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weather-horizontal-inside">
+            <div class="weather-vertical">
+                <h4 class="h4">{{weather.location.name}} {{weather.location.country}}</h4>
+                <img src="{{weather.current.condition.icon}}">
+            </div>
+
+            <div class="right-container" ng-show="showWeatherItem()">
+                Latitude: {{weather.location.lat}}, Longitude: {{weather.location.lon}}<br>
+                Localtime: {{weather.current.last_updated}}<br>
+                {{weather.current.condition.text}}, Temp.: {{weather.current.temp_c}} Feels like:
+                {{weather.current.feelslike_c}}<br>
+                Cloud: {{weather.current.cloud}} %<br>
+                Wind speed: {{weather.current.wind_kph}} km/h Gusts: {{weather.current.gust_kph}} km/h<br>
+                Wind direction: {{weather.current.wind_dir}}<br>
+                Pressure: {{weather.current.pressure_mb * 0.75}} mmHg, Precipitation: {{weather.current.precip_mm}}
+                mm<br>
+                Humidity: {{weather.current.humidity}} %<br>
+                UV: {{weather.current.uv}} Visibility: {{weather.current.vis_km}} km<br>
+            </div>
+        </div>
+    </div>
+    <div class="weather-vertical-inside">
+        <h4 class="h4">Текущий город для сохранения погоды: {{city.response}}</h4>
+        <div class="right-container">
+            <label>Изменить город для получения погоды:
+                <input type="text" placeholder="Введите название города на анклийском"
+                       ng-model="newCity">
+                <button type="submit" ng-click="changeCityName()">Применить</button>
+                <br>
+
+            </label>
+        </div>
+        <div class="error">
+            {{city.error}}
+            {{deleteResponse.error}}
+            {{deleteResponse.response}}
+        </div>
+    </div>
+</div>
+

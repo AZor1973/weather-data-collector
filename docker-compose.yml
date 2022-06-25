@@ -1,0 +1,52 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo
+    container_name: weather-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - data:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=azor
+      - MONGO_INITDB_ROOT_PASSWORD=azor
+  mongo-express:
+    image: mongo-express
+    container_name: weather-mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=azor
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=azor
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+  redis:
+    image: bitnami/redis:latest
+    container_name: weather-redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"
+  artemis:
+    image: vromero/activemq-artemis
+    container_name: weather-artemis
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    environment:
+      - ARTEMIS_USERNAME=azor
+      - ARTEMIS_PASSWORD=azor
+  weather-data-collector:
+    image: weather-collector
+    container_name: weather-collector-container
+    ports:
+      - "8000:8000"
+    environment:
+      - configDirectory=file:///tmp/application.yaml
+    volumes:
+      - E:\resources\application.yaml:/tmp/application.yaml
+volumes:
+  data: {}
+networks:
+  default:
+    name: weather-network

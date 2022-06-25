@@ -1,0 +1,37 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /weather
+spring:
+  data:
+    mongodb:
+      host: 'localhost'
+      port: 27017
+      authentication-database: 'admin'
+      username: 'azor'
+      password: 'azor'
+      database: 'weather'
+      auto-index-creation: true
+  artemis:
+    password: 'azor'
+    user: 'azor'
+    broker-url: 'tcp://localhost:61616'
+api-key: 82bd723c51184b4491f74810222305
+redis-key: redis-key
+redis-host: 'localhost'
+clear-redis-cron: 0 0 0 1 * *
+get-current-weather-cron: 0 0 * * * *
+base-url: http://api.weatherapi.com/v1
+current-url: /current.json
+forecast-url: /forecast.json
+forecast-days: 10
+timeout: 1000
+set-queue-name: 'city_name'
+confirmation-queue-name: 'confirmation_city_name'
+error-queue-name: 'error_city_name'
+#spring:
+#  jackson:
+#    serialization:
+#      wrap-root-value: true
+#    deserialization:
+#      unwrap-root-value: true

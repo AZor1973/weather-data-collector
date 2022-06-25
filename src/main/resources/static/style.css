@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+html {
+
+}
+
+body {
+
+    /*background-size: 100vw 100vh;*/
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    background-image: url(img/background_main.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.content{
+    flex: 1 0 auto;
+}
+
+.weather-vertical{
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-vertical-inside{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-horizontal-inside{
+    /*height: 40vh;*/
+    display: flex;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.weather-horizontal{
+    display: flex;
+    /*justify-content: space-evenly;*/
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.forecast{
+    margin-left: 40px;
+    width: 60vw;
+    display: flex;
+    overflow-x: auto;
+}
+
+.forecast-hour{
+    margin-right: 20px;
+}
+
+.left-container {
+    height: 45vh;
+    overflow-y: auto;
+    /*overflow-x: scroll;*/
+    margin-left: 20px;
+    margin-top: 20px;
+    color: blue;
+    /*color: rgb(0, 153, 255);*/
+    text-shadow: 2px 2px 3px chartreuse, 0 0 1em chartreuse;
+}
+
+.right-container {
+    /*height: 45vh;*/
+    overflow-y: auto;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: x-large;
+    color: blue;
+    text-shadow: 2px 2px 3px chartreuse, 0 0 1em chartreuse;
+}
+
+.error{
+    font-size: x-large;
+    color: red;
+}
+
+.top {
+
+    /*flex-grow: 1;*/
+}
+
+.header {
+    display: flex;
+
+}
+
+.menu {
+    margin-left: 20px;
+    margin-top: 20px;
+
+}
+
+.menu_title, .menu_link {
+    font-size: medium;
+    color: white;
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    text-decoration: underline;
+}
+
+.motto {
+    font-size: x-large;
+    font-style: italic;
+    color: pink;
+}
+
+.motto:hover::after {
+    content: ' :))';
+}
+
+.smile {
+
+}
+
+.menu, .h1, .motto, .h4, .text, .footer {
+    font-family: cursive;
+}
+
+.h1 {
+    text-align: center;
+    font-size: 5vw;
+    color: rgb(180, 248, 78);
+    margin-top: 0px;
+}
+
+.h4, .text {
+    color: white;
+    text-shadow: 2px 2px 3px blue, 0 0 1em blue;
+    font-size: 2vw;
+    margin-left: 20px;
+}
+
+.text {
+    width: 50%;
+}
+
+.email {
+    text-align: center;
+    font-size: 5vw;
+    color: rgb(0, 153, 255);
+    text-shadow: 2px 2px 3px chartreuse, 0 0 1em chartreuse;
+}
+
+.footer {
+    flex: 0 0 auto;
+
+    padding: 20px;
+    color: white;
+    font-size: medium;
+}
