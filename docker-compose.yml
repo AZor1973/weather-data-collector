@@ -45,7 +45,7 @@ services:
     networks:
       - weather-network
   weather-data-collector:
-#    image: weather-collector
+    image: weather-collector
     container_name: weather-collector-container
     build:
       context: .
