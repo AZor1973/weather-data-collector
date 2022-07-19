@@ -10,6 +10,8 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=azor
       - MONGO_INITDB_ROOT_PASSWORD=azor
+    networks:
+      - weather-network
   mongo-express:
     image: mongo-express
     container_name: weather-mongo-express
@@ -20,6 +22,8 @@ services:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=azor
       - ME_CONFIG_MONGODB_ADMINPASSWORD=azor
       - ME_CONFIG_MONGODB_SERVER=mongodb
+    networks:
+      - weather-network
   redis:
     image: bitnami/redis:latest
     container_name: weather-redis
@@ -27,6 +31,8 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - "6379:6379"
+    networks:
+      - weather-network
   artemis:
     image: vromero/activemq-artemis
     container_name: weather-artemis
@@ -36,17 +42,26 @@ services:
     environment:
       - ARTEMIS_USERNAME=azor
       - ARTEMIS_PASSWORD=azor
+    networks:
+      - weather-network
   weather-data-collector:
-    image: weather-collector
+#    image: weather-collector
     container_name: weather-collector-container
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        JAR_FILE: target/weather-data-collector-0.0.1-SNAPSHOT.jar
     ports:
       - "8000:8000"
     environment:
       - configDirectory=file:///tmp/application.yaml
     volumes:
       - E:\resources\application.yaml:/tmp/application.yaml
+    networks:
+      - weather-network
 volumes:
   data: {}
 networks:
-  default:
-    name: weather-network
+  weather-network:
+    driver: bridge
